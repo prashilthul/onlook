@@ -15,6 +15,17 @@ export interface HydrateMessageOptions {
     lastAssistantMessageIndex: number;
 }
 
+export function getDateContext(): string {
+    const now = new Date();
+    const formatted = now.toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
+    return wrapXml('environment', `Today's date is ${formatted}.`);
+}
+
 export function getSystemPrompt() {
     let prompt = '';
     prompt += wrapXml('role', SYSTEM_PROMPT);
